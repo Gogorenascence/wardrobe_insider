@@ -2,8 +2,8 @@
 
 Team:
 
-* Person 1 - Which microservice?
-* Person 2 - Which microservice?
+* Person 1 - Kornebari Nantah - Shoes microservice
+* Person 2 - Chris Michael - Hats microservice
 
 ## Design
 
