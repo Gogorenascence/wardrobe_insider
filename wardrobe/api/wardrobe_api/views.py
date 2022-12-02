@@ -74,13 +74,13 @@ def api_locations(request):
         )
 
 @require_http_methods(["DELETE", "GET", "PUT"])
-def api_location(request, pk):
+def api_location(request, id):
     """
     Single-object API for the Location resource.
 
     GET:
     Returns the information for a Location resource based
-    on the value of pk
+    on the value of id
     {
         "id": database id for the location,
         "closet_name": location's closet name,
@@ -91,7 +91,7 @@ def api_location(request, pk):
 
     PUT:
     Updates the information for a Location resource based
-    on the value of the pk
+    on the value of the id
     {
         "closet_name": location's closet name,
         "section_number": the number of the wardrobe section,
@@ -103,7 +103,7 @@ def api_location(request, pk):
     """
     if request.method == "GET":
         try:
-            location = Location.objects.get(id=pk)
+            location = Location.objects.get(id=id)
             return JsonResponse(
                 location,
                 encoder=LocationEncoder,
@@ -115,7 +115,7 @@ def api_location(request, pk):
             return response
     elif request.method == "DELETE":
         try:
-            location = Location.objects.get(id=pk)
+            location = Location.objects.get(id=id)
             location.delete()
             return JsonResponse(
                 location,
@@ -127,7 +127,7 @@ def api_location(request, pk):
     else: # PUT
         try:
             content = json.loads(request.body)
-            location = Location.objects.get(id=pk)
+            location = Location.objects.get(id=id)
 
             props = ["closet_name", "shelf_number", "section_number"]
             for prop in props:
@@ -194,13 +194,13 @@ def api_bins(request):
 
 
 @require_http_methods(["DELETE", "GET", "PUT"])
-def api_bin(request, pk):
+def api_bin(request, id):
     """
     Single-object API for the Bin resource.
 
     GET:
     Returns the information for a Bin resource based
-    on the value of pk
+    on the value of id
     {
         "id": database id for the bin,
         "closet_name": bin's closet name,
@@ -211,7 +211,7 @@ def api_bin(request, pk):
 
     PUT:
     Updates the information for a Bin resource based
-    on the value of the pk
+    on the value of the id
     {
         "closet_name": bin's closet name,
         "bin_number": the number of the bin,
@@ -223,7 +223,7 @@ def api_bin(request, pk):
     """
     if request.method == "GET":
         try:
-            bin = Bin.objects.get(id=pk)
+            bin = Bin.objects.get(id=id)
             return JsonResponse(
                 bin,
                 encoder=BinEncoder,
@@ -235,7 +235,7 @@ def api_bin(request, pk):
             return response
     elif request.method == "DELETE":
         try:
-            bin = Bin.objects.get(id=pk)
+            bin = Bin.objects.get(id=id)
             bin.delete()
             return JsonResponse(
                 bin,
@@ -247,7 +247,7 @@ def api_bin(request, pk):
     else: # PUT
         try:
             content = json.loads(request.body)
-            bin = Bin.objects.get(id=pk)
+            bin = Bin.objects.get(id=id)
 
             props = ["closet_name", "bin_number", "bin_size"]
             for prop in props:
