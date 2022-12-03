@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 # from django.urls import reverse
@@ -15,19 +16,20 @@ class Shoe(models.Model):
     manufacturer = models.CharField(max_length=200, null=True, blank=True)
     model_name = models.CharField(max_length=200)
     color = models.CharField(max_length=200, null=True, blank=True)
-    picture_url = models.CharField(max_length=200, null=True, blank=True)
+    picture_url = models.URLField(null=True)
 
-    Bin = models.ForeignKey(
+    bin = models.ForeignKey(
         BinVO,
         related_name="shoes",
         on_delete=models.CASCADE,
     )
 
-    # def get_api_url(self):
-    #         return reverse("api_show_location", kwargs={"id": self.id})
-
     def __str__(self):
         return self.name
+
+    def get_api_url(self):
+        return reverse("api_show_shoe", kwargs={"id": self.id})
+
 
     # def create_badge():
     #     try:
