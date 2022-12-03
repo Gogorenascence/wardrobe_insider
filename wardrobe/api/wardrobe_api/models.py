@@ -23,7 +23,7 @@ class Bin(models.Model):
     bin_size = models.PositiveSmallIntegerField()
 
     def get_api_url(self):
-        return reverse("api_location", kwargs={"id": self.id})
+        return reverse("api_bin", kwargs={"id": self.id})
 
     def __str__(self):
         return f"{self.closet_name} - {self.bin_number}/{self.bin_size}"
