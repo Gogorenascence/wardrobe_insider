@@ -10,12 +10,12 @@ import json
 
 class BinVODetailEncoder(ModelEncoder):
     model = BinVO
-    properties = ["closet_name", "bin_number", "bin_size", "import_href"]
+    properties = ["closet_name", "bin_number", "import_href"]
 
 
 class ShoeListEncoder(ModelEncoder):
     model = Shoe
-    properties = ["model_name"]
+    properties = ["model_name", "id"]
 
 
 class ShoeDetailEncoder(ModelEncoder):
@@ -27,10 +27,10 @@ class ShoeDetailEncoder(ModelEncoder):
 
 
 @require_http_methods(["GET", "POST"])
-def api_list_shoes(request, bin_vo_id=None):
+def api_list_shoes(request, id=None):
     if request.method == "GET":
-        if bin_vo_id is not None:
-            shoes = Shoe.objects.filter(bin=bin_vo_id)
+        if id is not None:
+            shoes = Shoe.objects.filter(bin=id)
         else:
             shoes = Shoe.objects.all()
         return JsonResponse(
@@ -41,7 +41,7 @@ def api_list_shoes(request, bin_vo_id=None):
     else:
         content = json.loads(request.body)
         try:
-            bin_href = f"/api/bin/{bin_vo_id}/"
+            bin_href = f"/api/bins/{id}/"
             bin = BinVO.objects.get(import_href=bin_href)
             content["bin"] = bin
         except BinVO.DoesNotExist:
