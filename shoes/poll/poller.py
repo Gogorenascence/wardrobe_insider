@@ -10,7 +10,7 @@ sys.path.append("")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "shoes_project.settings")
 django.setup()
 
-from shoes.api.shoes_rest.models import BinVO
+from shoes_rest.models import BinVO
 # Import models from hats_rest, here.
 # from shoes_rest.models import Something
 
