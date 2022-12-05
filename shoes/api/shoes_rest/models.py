@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-# from django.core.exceptions import ObjectDoesNotExist
+
 
 
 class BinVO(models.Model):
@@ -10,6 +10,8 @@ class BinVO(models.Model):
     bin_size = models.PositiveSmallIntegerField()
     import_href = models.CharField(max_length=200, unique=True)
 
+    def __str__(self):
+        return self.closet_name
 
 class Shoe(models.Model):
     manufacturer = models.CharField(max_length=200, null=True, blank=True)

@@ -15,8 +15,10 @@ class BinVODetailEncoder(ModelEncoder):
 
 class ShoeListEncoder(ModelEncoder):
     model = Shoe
-    properties = ["model_name", "id"]
-
+    properties = ["model_name", "bin", "id"]
+    encoders = {
+        "bin": BinVODetailEncoder(),
+    }
 
 class ShoeDetailEncoder(ModelEncoder):
     model = Shoe
@@ -29,10 +31,7 @@ class ShoeDetailEncoder(ModelEncoder):
 @require_http_methods(["GET", "POST"])
 def api_list_shoes(request, id=None):
     if request.method == "GET":
-        if id is not None:
-            shoes = Shoe.objects.filter(bin=id)
-        else:
-            shoes = Shoe.objects.all()
+        shoes = Shoe.objects.all()
         return JsonResponse(
             {"shoes": shoes},
             encoder=ShoeListEncoder,
