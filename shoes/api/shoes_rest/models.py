@@ -2,16 +2,13 @@ from django.db import models
 from django.urls import reverse
 
 
-
-
 class BinVO(models.Model):
     closet_name = models.CharField(max_length=100)
-    bin_number = models.PositiveSmallIntegerField()
-    bin_size = models.PositiveSmallIntegerField()
     import_href = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
         return self.closet_name
+
 
 class Shoe(models.Model):
     manufacturer = models.CharField(max_length=200, null=True, blank=True)

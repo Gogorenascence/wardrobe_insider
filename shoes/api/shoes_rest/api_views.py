@@ -1,6 +1,3 @@
-# from django.shortcuts import render
-
-
 from django.http import JsonResponse
 from .models import Shoe, BinVO
 from common.json import ModelEncoder
@@ -10,7 +7,7 @@ import json
 
 class BinVODetailEncoder(ModelEncoder):
     model = BinVO
-    properties = ["closet_name", "bin_number", "import_href"]
+    properties = ["closet_name", "import_href", "id"]
 
 
 class ShoeListEncoder(ModelEncoder):
@@ -22,16 +19,19 @@ class ShoeListEncoder(ModelEncoder):
 
 class ShoeDetailEncoder(ModelEncoder):
     model = Shoe
-    properties = ["manufacturer", "model_name", "color", "picture_url", "bin"]
+    properties = ["manufacturer", "model_name", "color", "picture_url", "bin", "id"]
     encoders = {
         "bin": BinVODetailEncoder(),
     }
 
 
 @require_http_methods(["GET", "POST"])
-def api_list_shoes(request, id=None):
+def api_list_shoes(request, bin_vo_id=None):
     if request.method == "GET":
-        shoes = Shoe.objects.all()
+        if bin_vo_id is not None:
+            shoes = Shoe.objects.filter(id=bin_vo_id)
+        else:
+            shoes = Shoe.objects.all()
         return JsonResponse(
             {"shoes": shoes},
             encoder=ShoeListEncoder,
@@ -40,7 +40,7 @@ def api_list_shoes(request, id=None):
     else:
         content = json.loads(request.body)
         try:
-            bin_href = f"/api/bins/{id}/"
+            bin_href = f"/api/bins/{bin_vo_id}/"
             bin = BinVO.objects.get(import_href=bin_href)
             content["bin"] = bin
         except BinVO.DoesNotExist:
