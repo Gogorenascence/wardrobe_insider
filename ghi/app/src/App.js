@@ -3,24 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
 // import HatForm from "./HatForm";
-// import HatList from "./HatList";
 import Shoes from "./Shoes";
 
-
-
-// function App(props) {
-//   return (
-//       <>
-//       <Nav />
-//       <div className="container">
-
-//       </div>
-//     </>
-//     // </BrowserRouter>
-//   );
-// }
-
-// export default App;
 
 function App(props) {
   return (
