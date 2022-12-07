@@ -7,12 +7,16 @@ Team:
 
 ## Design
 
+Use one App.js file to combine a single Hats.js and single Shoes.js file with both form and list functions
+
 ## Shoes microservice
 
-Explain your models and integration with the wardrobe
-microservice, here.
+Shoe was created as a model for shoes microservice according to the rubric
+Bin is a foreign key to the bin model in the wardrobe microserice
+BinVO is a value object model in the shoes microservice
 
 ## Hats microservice
 
-Explain your models and integration with the wardrobe
-microservice, here.
+Hat was created as a model for hats microservice according to the rubric
+Location is a foreign key to the location model in the wardrobe microserice
+LcationVO is a value object model in the shoes microservice
