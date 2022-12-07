@@ -3,10 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
 import Hats from './Hats';
-
-
-
-// import HatForm from "./HatForm";
 import Shoes from "./Shoes";
 
 
