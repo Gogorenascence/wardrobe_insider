@@ -17,15 +17,13 @@ def get_location():
     content = json.loads(response.content)
     for location in content["locations"]:
         LocationVO.objects.update_or_create(
+            #How do I find the object I'm creating or overwriting
             import_href=location["href"],
+            #only use the fields you need for creation of VOS
             defaults={
-            "closet_name": location["closet_name"],
-            "section_number": location["section_number"],
-            "shelf_number": location["shelf_number"],
+                "closet_name": location["closet_name"]
             },
         )
-
-        print(LocationVO.objects.all())
 
 def poll():
     while True:
