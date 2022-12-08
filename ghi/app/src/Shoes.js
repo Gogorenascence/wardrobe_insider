@@ -27,7 +27,7 @@ class Shoes extends React.Component {
         delete data.bins;
         delete data.shoes;
         delete data.toggled;
-        console.log(data)
+        // console.log(data)
         const binId = data.bin;
 
         const shoeUrl = `http://localhost:8080/api/bins/${binId}/shoes/`;
@@ -89,12 +89,14 @@ class Shoes extends React.Component {
 }
 
     render() {
-            let hideForm = ""
-            let shoeList = "form-select d-none"
-            if (this.state.toggled === false){
-                hideForm = "d-none"
-                shoeList = ""
-            }
+        let hideForm = ""
+        let shoeList = "form-select d-none"
+        
+        if (this.state.toggled === false){
+            hideForm = "d-none"
+            shoeList = ""
+        }
+
         return (
             <div className="row">
                 <div className="offset-3 col-6">

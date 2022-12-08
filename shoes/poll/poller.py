@@ -17,9 +17,12 @@ def get_bins():
     response = requests.get("http://wardrobe-api:8000/api/bins/")
     content = json.loads(response.content)
     for bin in content["bins"]:
-        BinVO.objects.update_or_create(
+        BinVO.objects.update_or_create(#How do I find the object I'm creating or overwriting
             import_href=bin["href"],
-            closet_name=bin["closet_name"],
+            #only use the fields you need for creation of VOS
+            defaults={
+                "closet_name": bin["closet_name"]
+            }
         )
 
 

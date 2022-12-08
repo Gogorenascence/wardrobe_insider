@@ -1,37 +1,49 @@
 import React from 'react';
 
 class Hats extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      style: '',
-      fabric: '',
-      color: '',
-      pictureUrl: '',
-      location: '',
-      locations: [],
-      hats: [],
-      toggled: false,
-    };
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     style: '',
+  //     fabric: '',
+  //     color: '',
+  //     pictureUrl: '',
+  //     location: '',
+  //     locations: [],
+  //     hats: [],
+  //     toggled: false,
+  //   };
+  // }
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange =this.handleChange.bind(this);
-    this.handleDelete =this.handleDelete.bind(this);
-    this.toggleState =this.toggleState.bind(this);
+  state = {
+    style: '',
+    fabric: '',
+    color: '',
+    picture_url: '',
+    location: '',
+    locations: [],
+    hats: [],
+    toggled: false, 
   }
 
-  async handleSubmit(event) {
+  handleSubmit = async (event) => {
     event.preventDefault();
     const data = {...this.state};
     delete data.locations;
     delete data.hats;
     delete data.toggled;
-    console.log(data)
-    const locationId = data.location
+    const locationId = data.location;
+
     const hatUrl = 'http://localhost:8090/api/hats/${locationId}/hats/';
     const fetchConfig = {
       method: "post",
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        style: this.state.style,
+        fabric: this.state.fabric,
+        color: this.state.color,
+        picture_url: this.state.picture_url,
+        location: this.state.location,
+      }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -43,57 +55,63 @@ class Hats extends React.Component {
             style: '',
             fabric: '',
             color: '',
-            pictureUrl: '',
+            picture_url: '',
             location: '',
       };
+
       this.setState(cleared);
       this.toggleState()
     }
   }
 
-  handleChange(event) {
+  toggleState() {
+    this.setState({toggled: this.state.toggled})
+  }
+
+  handleChange = async (event) => {
     const value = event.target.value;
     this.setState({[event.target.name]:value})
   }
 
-  async handleDelete(hat){
+  handleDelete = async (hat) => {
+    const deleteUrl = await fetch("http://localhost:8090/api/hats/" + hat.id, {method:'delete'})
+    
     const index = this.state.hats.indexOf(hat)
-    this.state.hats.splice(index,1)
-    this.setState({hats:[...this.state.shoes]})
-    const deleteUrl =await fetch('http://localhost:8090/api/hats/${hat.id}/', {method:'delete'})
-  }
+    
+    // this.state.hats.splice(index,1)
+    // this.setState({hats:[...this.state.shoes]})
 
-    toggleState(){
-      this.setState({togled: this.state.toggled})
-    }
+    this.setState({
+      hats:[this.state.hats.filter(h=> h.id !== hat.id)]
+    })
+  }
 
 
   async componentDidMount() {
-    const locationsUrl = 'http://localhost:8100/api/locations/';
-    const hatsUrl = 'http://localhost:8090/api/locations/'
-
-    const locationsResponse = await fetch(locationsUrl);
+    const hatsUrl = 'http://localhost:8090/api/hats/'
     const hatsResponse = await fetch(hatsUrl);
+    if (hatsResponse.ok) {
+      const data = await hatsResponse.json();
+      this.setState({hats: data.hats});
+    }
 
-
+    const locationsUrl = 'http://localhost:8100/api/locations/';
+    const locationsResponse = await fetch(locationsUrl);
     if (locationsResponse.ok) {
       const data = await locationsResponse.json();
       this.setState({locations: data.locations});
-    }
-
-    if (hatsResponse.ok) {
-        const data = await hatsResponse.json();
-        this.setState({hats: data.hats});
     }
 }
 
   render() {
       let hideForm = ""
       let hatList = "form-select d-none"
+
       if (this.state.toggled === false){
         hideForm = "d-none"
         hatList = ""
       }
+
       return (
       <div className="row">
         <div className="offset-3 col-6">

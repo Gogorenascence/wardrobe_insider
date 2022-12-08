@@ -23,7 +23,7 @@ class Shoe(models.Model):
     )
 
     def __str__(self):
-        return self.model_name
+        return f"{self.model_name} : {self.color}"
 
     def get_api_url(self):
         return reverse("api_show_shoe", kwargs={"id": self.id})

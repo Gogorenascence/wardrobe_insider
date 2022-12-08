@@ -46,7 +46,7 @@ def api_list_shoes(request, bin_vo_id=None):
         except BinVO.DoesNotExist:
             return JsonResponse(
                 {"message": "invalid bin id"},
-                status=400,
+                status=404,
             )
         shoe = Shoe.objects.create(**content)
         return JsonResponse(
@@ -59,6 +59,7 @@ def api_list_shoes(request, bin_vo_id=None):
 @require_http_methods(["DELETE", "GET", "PUT"])
 def api_show_shoe(request, id):
     if request.method == "GET":
+        #validation
         shoe = Shoe.objects.get(id=id)
         return JsonResponse(
             shoe,
@@ -72,7 +73,7 @@ def api_show_shoe(request, id):
         content = json.loads(request.body)
 
         Shoe.objects.filter(id=id).update(**content)
-
+        #validation
         shoe = Shoe.objects.get(id=id)
         return JsonResponse(
             shoe,
