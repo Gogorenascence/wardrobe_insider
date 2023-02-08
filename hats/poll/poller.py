@@ -24,7 +24,7 @@ def get_location():
             "shelf_number": location["shelf_number"],
             },
         )
-
+        #dont need section and shelf number
         print(LocationVO.objects.all())
 
 def poll():
@@ -34,7 +34,7 @@ def poll():
             get_location()
         except Exception as e:
             print(e, file=sys.stderr)
-        time.sleep(10)
+        time.sleep(5)
 
 
 if __name__ == "__main__":

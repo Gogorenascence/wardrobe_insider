@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.main-page {
+  background-image: url("./img/shoe1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.display-text{
+  font-size: 3.5rem;
+  color:white !important;
+  margin-top: 8rem;
+  margin-bottom: 2rem;
+}
+
+.h2{
+  color: white;
+}

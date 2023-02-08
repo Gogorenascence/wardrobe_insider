@@ -6,7 +6,7 @@ import Hats from './Hats';
 
 
 
-// import HatForm from "./HatForm";
+
 import Shoes from "./Shoes";
 
 
