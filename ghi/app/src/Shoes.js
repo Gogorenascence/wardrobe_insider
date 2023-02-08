@@ -104,11 +104,11 @@ class Shoes extends React.Component {
                         <form onSubmit={this.handleSubmit} id="create-shoe-form">
                             <div className="form-floating mb-3">
                                 <input onChange={this.handleChange} value={this.state.model_name} placeholder="model name" required type="text" name="model_name" id="model_name" className="form-control"/>
-                                <label htmlFor="model_name">Model name</label>
+                                <label htmlFor="model_name">Model Name</label>
                             </div>
-                            <div className="mb-3">
-                                <input onChange={this.handleChange} value={this.state.manufacturer} type="manufacturer" className="form-control" name="manufacturer" id="manufacturer" placeholder="manufacturer"/>
-                                <label htmlFor="manufacturer" className="form-label">Manufacturer</label>
+                            <div className="form-floating mb-3">
+                                <input onChange={this.handleChange} value={this.state.manufacturer} placeholder="" type="manufacturer" className="form-control" name="manufacturer" id="manufacturer" />
+                                <label htmlFor="manufacturer" >Manufacturer</label>
                             </div>
                             <div className="form-floating mb-3">
                                 <input onChange={this.handleChange} value={this.state.color} placeholder="color" type="text" name="color" id="color" className="form-control"/>
@@ -130,8 +130,8 @@ class Shoes extends React.Component {
                                 })}
                             </select>
                             </div>
-                            <button className="btn btn-primary">Create</button>
-                            <button onClick = { this.toggleState} className="btn btn-primary">View shoes</button>
+                            <button className="btn btn-danger">Create</button>
+                            <button onClick = { this.toggleState} className="btn btn-danger">View shoes</button>
                         </form>
                         </div>
                         <div className={shoeList}>
@@ -148,13 +148,13 @@ class Shoes extends React.Component {
                                   <tr key={shoe.href}>
                                     <td>{ shoe.model_name }</td>
                                     <td>{ shoe.bin.closet_name }</td>
-                                    <td><button onClick={()=>this.handleDelete(shoe)} className = "btn btn-secondary"> Delete Shoe </button></td>
+                                    <td><button onClick={()=>this.handleDelete(shoe)} className = "btn btn-danger"> Delete Shoe </button></td>
                                   </tr>
                                 );
                               })}
                           </tbody>
                         </table>
-                        <button onClick = { this.toggleState} className="btn btn-primary">Create a new shoe</button>
+                        <button onClick = { this.toggleState} className="btn btn-danger">Create a new shoe</button>
                       </div>
                     </div>
                 </div>

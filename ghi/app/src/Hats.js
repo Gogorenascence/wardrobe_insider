@@ -129,8 +129,8 @@ class Hats extends React.Component {
                   })}
                 </select>
               </div>
-              <button className="btn btn-primary">Create</button>
-              <button onClick ={this.toggleState} className="btn btn-primary">View Hats</button>
+              <button className="btn btn-danger">Create</button>
+              <button onClick ={this.toggleState} className="btn btn-danger">View Hats</button>
             </form>
             </div>
             <div className ={hatList}>
@@ -147,13 +147,13 @@ class Hats extends React.Component {
                       <tr key={hat.href}>
                         <td>{ hat.style }</td>
                         <td>{ hat.location.closet_name }</td>
-                        <td><button onClick={()=>this.handleDelete(hat)} className = "btn btn-secondary"> Delete Hat </button></td>
+                        <td><button onClick={()=>this.handleDelete(hat)} className = "btn btn-danger"> Delete Hat </button></td>
                       </tr>
                     );
                   })}
                 </tbody>
               </table>
-              <button onClick = { this.toggleState} className="btn btn-primary">Create A New Hat</button>
+              <button onClick = { this.toggleState} className="btn btn-danger">Create A New Hat</button>
             </div>
           </div>
         </div>
